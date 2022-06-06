@@ -22,7 +22,7 @@ const crawl = async (url) => {
         const coinObj = {}
 
 
-        if(index <= 8) { // Get top 8 rank cyptocurrency
+        if(index < 10) { // Get top 10 rank cyptocurrency
             $(row).children().each((indexChild, column) => {
                 if($(column).text()){ 
                     switch (keyIdx) {
