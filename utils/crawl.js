@@ -5,8 +5,8 @@ const properties = [
     'rank',
     'name',
     'price',
-    '24h',
-    '7d',
+    'day',
+    'week',
     'marketCap',
     'volume',
     'circulatingSupply'
