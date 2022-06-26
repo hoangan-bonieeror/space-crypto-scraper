@@ -17,7 +17,7 @@ setInterval(() => {
     console.log('Refresh data...')
 }, 10000) // 
 
-socketServer(server);
+socketServer(server, client);
 
 app.get('/api/price-feed', async (req,res) => {
     try {

@@ -1,16 +1,14 @@
-const { crawl , handleLang } = require('../utils/crawl')
-
-module.exports = (httpServer) => {
+module.exports = (httpServer, client) => {
     const { Server } = require('socket.io')
     const io = new Server(httpServer)
 
     io.on('connection', async (socket) => {
-        const data = await crawl(handleLang('https://coinmarketcap.com/', 'vi'))
-        socket.emit('loadData', data)
+        const responseFromDB = await client.query('SELECT * FROM crypto')
+        socket.emit('loadData', responseFromDB.rows)
 
         const refreshData = setInterval(async () => {
-            socket.emit('refreshData', await crawl(handleLang('https://coinmarketcap.com/', 'vi')))
-        }, 5000)
+            socket.emit('refreshData', responseFromDB.rows)
+        }, 10000)
 
         socket.on('disconnect', () => {
             clearInterval(refreshData)
